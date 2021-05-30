@@ -1,47 +1,67 @@
-# string checker to find out what shape user wants calculated
+# define a function for calculating
+# the area of a shapes
+def calculate_area(name): \
 
-def string_check(choice, options):
+    # converting all characters
+    # into lower cases
 
-    for var_list in options:
-
-        # if the snack is in one of the lists, return the full snack name
-        if choice in var_list:
-
-            # Get the full name of the snack and put it in
-            # title case so it looks nice when outputted
-            chosen = var_list[0].title()
-            is_valid = "yes"
-            break
-
-        # if the chosen option is not valid, set is_valid to no
-        else:
-            is_valid = "no"
-    if is_valid == "yes":
-        return chosen
+    name = name.lower()
+    
+    # check for the conditions
+    if name == "rectangle":
+        l = int(input("Enter rectangle's length: "))
+        b = int(input("Enter rectangle's width: "))
+    
+        # calculate area of rectangel
+        rect_area = l * b
+        print(
+        "The area of rectangle is {}".format(rect_area))
+    
+    elif name == "square":
+        s = int(input("Enter square's side length: "))
+    
+        # calculate area of square
+        sqt_area = s * s
+        print(
+        "The area of square is {}".format(sqt_area))
+    
+    elif name == "triangle":
+        h = int(input("Enter triangle's height length: "))
+        b = int(input("Enter triangle's width length: "))
+    
+        # calculate area of triangle
+        tri_area = 0.5 * b * h
+        print(
+        "The area of triangle is {}".format(tri_area))
+    
+    elif name == "circle":
+        r = int(input("Enter circle's radius length: "))
+        pi = 3.14
+    
+        # calculate area of circle
+        circ_area = pi * r * r
+        print(
+        "The area of triangle is {}".format(circ_area))
+    
+    elif name == 'parallelogram':
+        b = int(input("Enter parallelogram's base length: "))
+        h = int(input("Enter parallelogram's height length: "))
+    
+        # calculate area of parallelogram
+        para_area = b * h
+        print(
+        "The area of parallelogram is {}".format(para_area))
+    
     else:
-        return "invalid choice"
+        print("Sorry! This shape is not available")
 
-# number checker to check if user has entered a whole number when asked questions that require a number value
+# driver code
+if __name__ == "__main__":
+    print("Calculate Shape Area")
+    shape_name = input("Enter the name of shape whose area you want to find: ")
 
-def int_check(question, low_num, high_num):
+    # function calling
+    calculate_area(shape_name)
 
-    error = "Please  enter a whole number between {} " \
-            "and {}".format(low_num, high_num)
-
-    valid = False
-    while not valid:
-
-        # ask user for number and check it is valid
-        try:
-            response = int(input(question))
-
-            if response <= 0:
-                print(error)
-            else:
-                return error
-
-        # if an integer is not entered, display an error
-        except ValueError:
-            print(error)
-
-# hi
+    #shape_name = input("What shape")
+    #calculate = calculate_area(shape_name)
