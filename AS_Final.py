@@ -1,6 +1,8 @@
 # define a function for calculating
 # the area of a shapes
-def calculate_area(name): \
+
+
+def calculate_area(name):
 
     # converting all characters
     # into lower cases
@@ -12,7 +14,7 @@ def calculate_area(name): \
         l = int(input("Enter rectangle's length: "))
         b = int(input("Enter rectangle's width: "))
     
-        # calculate area of rectangel
+        # calculate area of rectangle
         rect_area = l * b
         print(
         "The area of rectangle is {}".format(rect_area))
@@ -41,7 +43,7 @@ def calculate_area(name): \
         # calculate area of circle
         circ_area = pi * r * r
         print(
-        "The area of triangle is {}".format(circ_area))
+        "The area of circle is {}".format(circ_area))
     
     elif name == 'parallelogram':
         b = int(input("Enter parallelogram's base length: "))
@@ -62,6 +64,3 @@ if __name__ == "__main__":
 
     # function calling
     calculate_area(shape_name)
-
-    #shape_name = input("What shape")
-    #calculate = calculate_area(shape_name)
