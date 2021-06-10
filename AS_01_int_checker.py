@@ -19,8 +19,8 @@ def number_checker(question, error, num_type):
 
 
 # Main Routine
-height = number_checker("What is the height? ", "Sorry, You have to enter an integer more than 0", float)
-base = number_checker("What is the base? ", "Sorry, You have to enter an integer more than 0", float)
+height = number_checker("What is the height? ", "This must be a number and is more than 0", float)
+base = number_checker("What is the base? ", "This must be a number and is more than 0", float)
 area = height * base
 
 print("{} x {} = {}".format(base, height, area))

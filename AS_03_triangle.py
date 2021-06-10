@@ -1,27 +1,27 @@
+# Component 2 - implementing triangles
+
 import math
 
 
 # string_checker function goes here
 # Ensures that an input is within the possible results
 def string_checker(choice, options, error):
-    is_valid = ""
-    chosen = ""
-
     for var_list in options:
 
-        # if the shape is in one of the lists, return the full list
+        # if the snack is in one of the lists, return the full list
         if choice in var_list:
 
-            # Get full name of shape and put it in title case
+            # Get full name of snack and put it in title case
+            # so it looks nice when out putted
             chosen = choice.title()
             is_valid = "yes"
             break
 
-        # if the chosen shape is not valid, set is_valid to no
+        # if the chosen snack is not valid, set snack_ok to no
         else:
             is_valid = "no"
 
-    # If shape is not OK - ask question again
+    # If snack is not OK - ask question again
     if is_valid == "yes":
         return chosen
     else:
@@ -29,70 +29,71 @@ def string_checker(choice, options, error):
         return "invalid choice"
 
 
-
 # triangle function goes here
-# Asks user what they want for there shape and calculates the area and perimeter
+# Figures out what the question gives and calculates the area and perimeter
 def triangle(info_type, result):
+    # Loop
     valid = False
     while not valid:
 
-        # User has given base and height
+        # When base and height is given
         if info_type == "Bh":
 
-            # Inform user cant be calculated
+            # When user wants the perimeter can't calculate
             if result == "perimeter":
-                print("Sorry, I can't find the perimeter with only base and height, Please enter more information")
+                print("I can't find the perimeter with only base and height because I don't have enough information")
                 return "Unable to calculate"
-            # Ask user for base height and length
+            # When user wants the area
             else:
                 base = float(input("What is the base length? "))
                 height = float(input("What is the height? "))
 
                 area = 0.5 * base * height
                 print("The area of your triangle is {}".format(area))
-                # return for future use
+                # return incase I need to use it in a list later on
                 return ("triangle", base, height, area)
 
-        # User has entered all triangle sides
+        # When triangle sides are given
         else:
             a = float(input("What is the length of a? "))
             b = float(input("What is the length of b? "))
             c = float(input("What is the length of c? "))
 
-            # Give user the area of there shape
+            # When user wants area
             if result == "area":
+                # Use Heron's law
                 s = (a + b + c) / 2
                 area = math.sqrt(s * (s - a) * (s - b) * (s - c))
                 print("The area of your triangle is {}".format(area))
-                # return for future use
+                # return incase I need to use it in a list later on
                 return ("triangle", a, b, c, area)
-            # Give user the perimeter of there shape
+            # When user want perimeter
             else:
                 perimeter = a + b + c
                 print("The area of your triangle is {}".format(perimeter))
-                # return for future use
+                # return incase I need to use it in a list later on
                 return ("triangle", a, b, c, perimeter)
 
 
 # Main Routine
 
-# Shape types
-shape_types = ["square", "rectangle", "parallelogram", "triangle", "circle",]
+# Set up shape types
+shape_types = ["square", "rectangle", "parallelogram", "triangle", "circle", "trapezium"]
 
-# Ask user for shape
-what_shape = input("Please enter a shape ").lower()
-check_shape = string_checker(what_shape, shape_types, "Please enter a valid shape")
+# Get the shape type
+what_shape = input("What shape do you want? ").lower()
+check_shape = string_checker(what_shape, shape_types, "Please enter a real shape")
 
-# Triangle
+# Triangle scenario
 if check_shape == "Triangle":
-    # Ask user for Area or Perimeter
-    triangle_outcome = input("Do you want to find the Area or Perimeter? ").lower()
+    # Find out what information the user wants
+    triangle_outcome = input("What do you want to find (Area or Perimeter)? ")
     triangle_outcome_check = string_checker(triangle_outcome, ["area", "perimeter"],
                                             "This must be either Area or Perimeter")
     print()
 
-    # Ask user for infomation about the tirangle
+    # Find out what the user knows
     triangle_info = input("What do you know about the triangle (bh or abc)? ")
     triangle_info_check = string_checker(triangle_info, ["bh", "abc"],
-                                         "Please enter either 'bh' for base and height or 'abc' for side lengths")
+                                         "Please say either 'bh' for base and height or abc for side lengths")
     triangle_calc = triangle(triangle_info_check, triangle_outcome)

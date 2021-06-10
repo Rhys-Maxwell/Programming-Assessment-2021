@@ -1,23 +1,42 @@
+# Component 2 - implementing triangles
+# v2 - puts some required input fields in the function to shorten the main routine
+
 import math
+
+
+# Number checker function goes here
+# Checks that it is not 0 and is a number
+def number_checker(question, error, num_type):
+    valid = False
+    while not valid:
+
+        try:
+            response = num_type(input(question))
+
+            if response <= 0:
+                print(error)
+            else:
+                return response
+
+        except ValueError:
+            print(error)
 
 
 # string_checker function goes here
 # Ensures that an input is within the possible results
 def string_checker(choice, options, error):
-    is_valid = ""
-    chosen = ""
-
     for var_list in options:
 
         # if the shape is in one of the lists, return the full list
         if choice in var_list:
 
             # Get full name of shape and put it in title case
-            chosen = choice.title()
+            # so it looks nice when out putted
+            chosen = var_list[0].title()
             is_valid = "yes"
             break
 
-        # if the chosen shape is not valid, set is_valid to no
+        # if the chosen shape is not valid
         else:
             is_valid = "no"
 
@@ -29,70 +48,62 @@ def string_checker(choice, options, error):
         return "invalid choice"
 
 
-
 # triangle function goes here
-# Asks user what they want for there shape and calculates the area and perimeter
-def triangle(info_type, result):
+# Figures out what the question gives and calculates the area and perimeter
+def triangle():
     valid = False
     while not valid:
+        # Find what the user is looking for
+        outcome = input("What do you want to find (Area or Perimeter)? ")
+        outcome_check = string_checker(outcome, ["area", "perimeter"], "This must be either Area or Perimeter")
+        if outcome_check == "invalid_choice":
+            continue
 
-        # User has given base and height
-        if info_type == "Bh":
+            # Find what the user is given
+        info = input("What do you know about the triangle (bh or abc)? ")
+        info_check = string_checker(info, ["bh", "abc"],
+                                    "Please say either 'bh' for base and height or abc for side lengths")
+        if info_check == "invalid_choice":
+            continue
 
-            # Inform user cant be calculated
-            if result == "perimeter":
-                print("Sorry, I can't find the perimeter with only base and height, Please enter more information")
+        # ------------- Calculations -------------
+        # If base and height is given
+        if info_check == "Bh":
+            # If the user is looking for perimeter
+            if outcome_check == "perimeter":
+                print("I can't find the perimeter with only base and height because I don't have enough information")
                 return "Unable to calculate"
-            # Ask user for base height and length
+            # If the user is looking for area
             else:
-                base = float(input("What is the base length? "))
-                height = float(input("What is the height? "))
+                base = number_checker("What is the base? ", "Please enter a numeber bigger than 0", float)
+                height = number_checker("What is the height? ", "Please enter a numeber bigger than 0", float)
 
                 area = 0.5 * base * height
                 print("The area of your triangle is {}".format(area))
-                # return for future use
-                return ("triangle", base, height, area)
-
-        # User has entered all triangle sides
+        # If triangle side lengths are given
         else:
-            a = float(input("What is the length of a? "))
-            b = float(input("What is the length of b? "))
-            c = float(input("What is the length of c? "))
-
-            # Give user the area of there shape
-            if result == "area":
+            a = number_checker("What is the length of a? ", "Please enter a numeber bigger than 0", float)
+            b = number_checker("What is the length of b? ", "Please enter a numeber bigger than 0", float)
+            c = number_checker("What is the length of c? ", "Please enter a numeber bigger than 0", float)
+            # If user wants the area
+            if outcome == "area":
                 s = (a + b + c) / 2
                 area = math.sqrt(s * (s - a) * (s - b) * (s - c))
                 print("The area of your triangle is {}".format(area))
-                # return for future use
-                return ("triangle", a, b, c, area)
-            # Give user the perimeter of there shape
+            # If the user is looking for perimeter
             else:
                 perimeter = a + b + c
                 print("The area of your triangle is {}".format(perimeter))
-                # return for future use
-                return ("triangle", a, b, c, perimeter)
+        # return this until I put in a lsit for history
+        return ("triangle", a, b, c,)
 
 
 # Main Routine
 
-# Shape types
-shape_types = ["square", "rectangle", "parallelogram", "triangle", "circle",]
+# The shape the user wants
+what_shape = get_shape()
+print(what_shape)
 
-# Ask user for shape
-what_shape = input("Please enter a shape ").lower()
-check_shape = string_checker(what_shape, shape_types, "Please enter a valid shape")
-
-# Triangle
-if check_shape == "Triangle":
-    # Ask user for Area or Perimeter
-    triangle_outcome = input("Do you want to find the Area or Perimeter? ").lower()
-    triangle_outcome_check = string_checker(triangle_outcome, ["area", "perimeter"],
-                                            "This must be either Area or Perimeter")
-    print()
-
-    # Ask user for infomation about the tirangle
-    triangle_info = input("What do you know about the triangle (bh or abc)? ")
-    triangle_info_check = string_checker(triangle_info, ["bh", "abc"],
-                                         "Please enter either 'bh' for base and height or 'abc' for side lengths")
-    triangle_calc = triangle(triangle_info_check, triangle_outcome)
+# Triangle Scenario
+if what_shape == "Triangle":
+    result = triangle()
