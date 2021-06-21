@@ -1,5 +1,3 @@
-# Component 2 - implementing triangles
-
 import math
 
 
@@ -8,24 +6,28 @@ import math
 def string_checker(choice, options, error):
     for var_list in options:
 
-        # if the snack is in one of the lists, return the full list
-        if choice in var_list:
+        # Blank case
+        if choice == "":
+            is_valid = "no"
+            break
+            # if the shape is in one of the lists, return the full list
+        elif choice in var_list:
 
-            # Get full name of snack and put it in title case
+            # Get full name of shape and put it in title case
             # so it looks nice when out putted
-            chosen = choice.title()
+            chosen = var_list.title()
             is_valid = "yes"
             break
 
-        # if the chosen snack is not valid, set snack_ok to no
+        # if the chosen shape is not valid
         else:
             is_valid = "no"
 
-    # If snack is not OK - ask question again
+    # If shape is not OK - ask question again
     if is_valid == "yes":
         return chosen
     else:
-        print(error + "\n")
+        print(error)
         return "invalid choice"
 
 
@@ -40,7 +42,7 @@ def triangle(info_type, result):
         if info_type == "Bh":
 
             # When user wants the perimeter can't calculate
-            if result == "perimeter":
+            if result == "Perimeter":
                 print("I can't find the perimeter with only base and height because I don't have enough information")
                 return "Unable to calculate"
             # When user wants the area
@@ -66,13 +68,13 @@ def triangle(info_type, result):
                 area = math.sqrt(s * (s - a) * (s - b) * (s - c))
                 print("The area of your triangle is {}".format(area))
                 # return incase I need to use it in a list later on
-                return ("triangle", a, b, c, area)
+                return ""
             # When user want perimeter
             else:
                 perimeter = a + b + c
-                print("The area of your triangle is {}".format(perimeter))
+                print("The perimeter of your triangle is {}".format(perimeter))
                 # return incase I need to use it in a list later on
-                return ("triangle", a, b, c, perimeter)
+                return ""
 
 
 # Main Routine

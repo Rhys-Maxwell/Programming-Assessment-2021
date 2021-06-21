@@ -1,5 +1,5 @@
 # Number checker function goes here
-# Ensures user enters a valid number
+# Checks that it is not 0 and is a number
 def number_checker(question, error, num_type):
     valid = False
     while not valid:
@@ -17,19 +17,24 @@ def number_checker(question, error, num_type):
 
 
 # string_checker function goes here
-# Ensure users answer is valid
+# Ensures that an input is within the possible results
 def string_checker(choice, options, error):
     for var_list in options:
 
-        # if the shape is in one of the lists, return the full list
-        if choice in var_list:
+        # Blank case
+        if choice == "":
+            is_valid = "no"
+            break
+            # if the shape is in one of the lists, return the full list
+        elif choice in var_list:
 
             # Get full name of shape and put it in title case
-            chosen = choice.title()
+            # so it looks nice when out putted
+            chosen = var_list[0].title()
             is_valid = "yes"
             break
 
-        # if the chosen shape is not valid, set is_valid to no
+        # if the chosen shape is not valid
         else:
             is_valid = "no"
 
@@ -37,5 +42,5 @@ def string_checker(choice, options, error):
     if is_valid == "yes":
         return chosen
     else:
-        print(error + "\n")
+        print(error)
         return "invalid choice"
