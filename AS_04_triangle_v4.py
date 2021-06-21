@@ -33,7 +33,7 @@ def string_checker(choice, options, error):
 
             # Get full name of shape and put it in title case
             # so it looks nice when out putted
-            chosen = var_list.title()
+            chosen = var_list[0].title()
             is_valid = "yes"
             break
 
@@ -57,7 +57,7 @@ def triangle():
 
         # Find what the user is given
         info = input("What do you know about the triangle [Base and height(bh)] or [the side lengths(abc)]? ").lower()
-        info_check = string_checker(info, ["bh", "abc"],
+        info_check = string_checker(info, [["bh"], ["abc"]],
                                     "Please say either 'bh' for base and height or 'abc' for side lengths")
         if info_check == "invalid choice":
             continue
