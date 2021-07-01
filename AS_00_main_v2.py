@@ -1,7 +1,6 @@
-# Area And Perimeter Base Code
-
 import math
 import pandas
+import os
 
 
 # number checker function goes here
@@ -306,7 +305,7 @@ def instructions():
     print("========== Welcome to the Area and Perimeter Calcualtor ==========\n")
     print(" HENRYB0T: Hello, My Name is HENRYB0T\n")
 
-    # Ask if user wants the instructions
+       # Ask if user wants the instructions
 valid = False
     while not valid:
         need_instructions = input("Would you like to see the instructions? ").lower()
@@ -339,13 +338,17 @@ valid = False
 # Main Routine
 history = []
 
-# Call Instructions function
+# Clears the terminal
+clear = lambda:os.system('cls')
+clear()
+
+# Begins intstructions
 have_instruction = instructions()
 
 # Whole main routine loop
 keep_going = ""
 while keep_going == "":
-    # Get the user's desired shape
+    # Get user's desired shape
     what_shape = get_shape()
 
     # Checks if it is a Triangle
@@ -369,10 +372,10 @@ while keep_going == "":
     # Exit Loop or loop again
     keep_going = input("\nIf you want to continue press enter or any other key to quit: ")
 
-# Puts the information in a pandas dataframe to be printed out as a table
+# Puts results in a dataframe
 print()
 print("=============== History ===============\n")
 history_frame = pandas.DataFrame(history, columns=["Shape", "Area", "Perimeter", "Info"])
 
-# Prints dataframe
+# Print Dataframe
 print(history_frame)

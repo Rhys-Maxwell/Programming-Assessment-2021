@@ -31,7 +31,7 @@ def string_checker(choice, options, error):
 
 
 # Main Routine
-valid_names = [["henry"], ["aref"], ["jt"]]
+valid_names = [["Rhys"], ["rhys"]]
 
 # For loop for testing purposes
 for item in range(0,4):

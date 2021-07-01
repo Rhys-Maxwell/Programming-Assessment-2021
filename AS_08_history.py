@@ -1,6 +1,5 @@
 import math
 
-
 # number checker function goes here
 # Checks that it is not 0 and is a number
 def number_checker(question, error, num_type):
@@ -9,7 +8,7 @@ def number_checker(question, error, num_type):
 
         try:
             response = num_type(input(question))
-
+        
             if response <= 0:
                 print(error)
             else:
@@ -17,7 +16,6 @@ def number_checker(question, error, num_type):
 
         except ValueError:
             print(error)
-
 
 # string_checker function goes here
 # Ensures that an input is within the possible results
@@ -27,8 +25,8 @@ def string_checker(choice, options, error):
         # Blank case
         if choice == "":
             is_valid = "no"
-            break
-            # if the shape is in one of the lists, return the full list
+            break 
+        # if the shape is in one of the lists, return the full list
         elif choice in var_list:
 
             # Get full name of shape and put it in title case
@@ -48,10 +46,10 @@ def string_checker(choice, options, error):
         print(error)
         return "invalid choice"
 
-
 # get_shape function goes here
 # get the desired shape
 def get_shape():
+
     # Possible Shapes
     valid_shapes = [["square", "squ", "s"],
                     ["rectangle", "rec", "r"],
@@ -79,13 +77,12 @@ def get_shape():
 
     return check_shape
 
-
 # rectangle function goes here
 # Find the base and height then calculate area and perimeter
 def rectangle():
     valid = False
     while not valid:
-
+        
         # Get base and height
         base = number_checker("What is the base? ", "Please enter a number above 0", float)
         height = number_checker("What is the height? ", "Please enter a number above 0", float)
@@ -108,17 +105,16 @@ def rectangle():
         # return this until I put in a list for history
         return ["Rectangle", base, height, area, perimeter]
 
-
 # triangle function goes here
 # Figures out what the question gives and calculates the area and perimeter
 def triangle():
+
     valid = False
     while not valid:
 
         # Find what the user is given
         info = input("What do you know about the triangle [Base and height(bh)] or [the side lengths(abc)]? ").lower()
-        info_check = string_checker(info, [["bh"], ["abc"]],
-                                    "Please say either 'bh' for base and height or 'abc' for side lengths")
+        info_check = string_checker(info, [["bh"], ["abc"]], "Please say either 'bh' for base and height or 'abc' for side lengths")
         if info_check == "invalid choice":
             continue
 
@@ -129,7 +125,7 @@ def triangle():
             # Find Base and height
             base = number_checker("What is the base? ", "Please enter a number bigger than 0", float)
             height = number_checker("What is the height? ", "Please enter a number bigger than 0", float)
-
+                
             area = 0.5 * base * height
             perimeter = "couldn't find"
 
@@ -146,7 +142,7 @@ def triangle():
             # Do Heron's Law and the sum of all the side lengths for perimeter
             s = (a + b + c) / 2
             perimeter = a + b + c
-            area = math.sqrt(s * (s - a) * (s - b) * (s - c))
+            area = math.sqrt(s * (s-a) * (s-b) * (s-c))
 
             print("The area of your triangle is {:.2f}".format(area))
             print("The perimeter of your triangle is {:.2f}".format(perimeter))
@@ -154,24 +150,28 @@ def triangle():
         # return this until I put in a list for history
         return ""
 
-
 # Main Routine
 history = []
 calc_num = 0
 
+# Keep going loop
 keep_going = ""
 while keep_going == "":
     what_shape = get_shape()
 
+    # Just do rectangle and triangle for testing purposes
     if what_shape == "Rectangle":
-        result = rectangle()
+            result = rectangle()
     else:
         result = triangle()
 
+    # Append results to a history list for later printing
     history.append(result)
     keep_going = input("\nIf you want to continue press enter or any other key to quit: ")
 
+# Printing Area
 print("==================== History ====================\n")
+# History method is to just loop a print statement until it prints the whole history
 for item in history:
     calc_num += 1
     print("{}| Shape: {} | Area: {} | Perimeter: {}".format(calc_num, item[0], item[3], item[4]))
